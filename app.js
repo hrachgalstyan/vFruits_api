@@ -1,7 +1,14 @@
 const express = require('express');
 const morgan = require('morgan');
-const bodyParser = require('body-parser');
+const rateLimit = require('express-rate-limit');
+const helmet = require('helmet');
+const mongoSanitize = require('express-mongo-sanitize');
+const xss = require('xss-clean');
 const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const compression = require('compression');
+
+const globalErrorHandler = require('./controllers/errorController');
 
 const ProductsRouter = require(`${__dirname}/routes/ProductsRouter`);
 const AdminRouter = require(`${__dirname}/routes/AdminRouter`);
@@ -20,8 +27,40 @@ if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
+  if(req.method === "OPTIONS"){
+    res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
+    return res.status(200).json({});
+  }
+  next();
+});
+
+// Set Security HTTP headers
+app.use(helmet());
+// Limit requests from same API
+const limiter = rateLimit({
+  max: 100,
+  windowMs: 60 * 60 * 1000,
+  message: 'Too many requests from this IP, please try again in an hour!',
+});
+
+app.use('/api', limiter);
 app.use(bodyParser.json());
+
+// Body parser, reading data from body into req.body
+app.use(express.json({limit: '10kb',}));
+app.use(express.urlencoded({extended: true, limit: '10kb',}));
 app.use(cookieParser());
+// Data sanitization against NOSQL query injection
+app.use(mongoSanitize());
+// Data sanitization against XSS
+app.use(xss());
+app.use(compression());
 
 app.use('/api/v1/products', ProductsRouter);
 app.use('/api/v1/admin', AdminRouter);
@@ -38,5 +77,7 @@ app.all('*', (req, res, next) => {
   console.log(`Can't find ${req.originalUrl} on this server!`);
   next();
 });
+
+app.use(globalErrorHandler);
 
 module.exports = app;
