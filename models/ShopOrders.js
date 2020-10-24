@@ -96,6 +96,7 @@ shopOrdersSchema.pre(/^save/, async function(next) {
 
 shopOrdersSchema.pre(/^save/, function(next) {
   helpers.sendToTelegram(`New Order\n\n🍐🍊🍋🍓🥝🥬🥕🥥🍇🍍`);
+  next();
 })
 
 shopOrdersSchema.pre('findOneAndUpdate', function(next) {
