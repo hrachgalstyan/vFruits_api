@@ -53,7 +53,8 @@ exports.ACTIVITY_LOGS_STATUS_TYPES = Object.freeze({
 
 exports.CHANGE_LOGS_TARGETS = Object.freeze({
   SHOP_ORDER: "ShopOrder",
-  PRODUCT: "Product"
+  PRODUCT: "Product",
+  CATEGORY: "Category"
 });
 
 exports.PAYMENT_METHODS = {

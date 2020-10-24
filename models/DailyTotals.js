@@ -25,15 +25,6 @@ const dailySchema = new mongoose.Schema({
   created_at: { type: Date, default: new Date(Date.now() + 14400000) },
 });
 
-// QUERY MIDDLEWARE
-// dailySchema.pre(/^find/, function (next) {
-//   this.populate({
-//     path: 'orders',
-//     select: '-__v -fromMobile'
-//   });
-//   next();
-// });
-
 dailySchema.pre(/^save/, function(next) {
   helpers.sendToTelegram(`${this.dateString} orders added! 💰💰💰`);
   next();
