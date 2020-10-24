@@ -22,7 +22,7 @@ const server = Server(app);
 server.listen(port);
 console.log(`App running on port ${port}...`);
 
-Worker();
+// Worker();
 
 process.on('uncaughtException', err => {
   console.log('UNCAUGHT EXCEPTION! 💥 Shutting down...');
