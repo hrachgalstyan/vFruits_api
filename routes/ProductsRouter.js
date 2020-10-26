@@ -1,8 +1,17 @@
 const express = require('express');
 const ProductsController = require('../controllers/ProductsController');
 const AuthAdminController = require('../controllers/AuthAdminController');
+const Products = require('../models/Products');
 
 const router = express.Router();
+
+router
+  .route('/new-products')
+  .get(ProductsController.aliasNewProducts, ProductsController.getAll);
+
+router
+  .route('/best-sale')
+  .get(ProductsController.aliasBestSale, ProductsController.getAll);
 
 router
   .route('/')
