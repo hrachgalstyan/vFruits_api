@@ -69,7 +69,7 @@ const shopOrdersSchema = new mongoose.Schema({
     maxOrder: { type: Number, default: 20 },
     minOrder: { type: Number, default: 0.5 },
     photo: String,
-    quantity: { type: Number, default: 0 }
+    quantity: { type: Number, default: 0, required: [true, "Quantity can not be 0."] }
   }],
 
   status: { type: String, default: helpers.ORDER_STATUS.PENDING, enum: Object.values(helpers.ORDER_STATUS) },

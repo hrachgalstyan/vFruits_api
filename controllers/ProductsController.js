@@ -3,7 +3,7 @@ const Factory = require('./HandlerFactory');
 
 exports.getAll = Factory.getAll(Products);
 exports.createProduct = Factory.createOne(Products);
-exports.getProduct = Factory.getOne(Products);
+exports.getProduct = Factory.getOne(Products, {path: 'ChangeLogs'});
 exports.updateProduct = Factory.updateOne(Products);;
 exports.deleteProduct = Factory.deleteOne(Products);
 

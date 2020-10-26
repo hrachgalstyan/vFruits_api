@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
+const helpers = require('../helpers');
 
 const adminSchema = new mongoose.Schema({
   name: {
@@ -21,7 +22,7 @@ const adminSchema = new mongoose.Schema({
         return el === this.password;
       },
       message: 'Passwords are not the same',
-    },
+    }
   },
   username: { 
     type: String, 
@@ -30,8 +31,11 @@ const adminSchema = new mongoose.Schema({
   },
   role: {
     type: String, 
-    default: "editor", 
-    enum: ["super_admin", "admin", "editor"]
+    default: "editor",
+    enum: {
+        values: helpers.ADMIN_ROLES,
+        message: 'Role is either: "super_admin", "admin", "editor"'
+    }
   },
   active: {
     type: Boolean,

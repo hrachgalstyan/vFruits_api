@@ -25,6 +25,7 @@ exports.MIN_ORDER_PRICE = 3000;
 exports.WORKER_INTERVAL = 60 * 1000;
 
 exports.DELIVERY_TIMES = ["10-11am", "13-14pm", "16-17pm", "19-20pm"];
+exports.ADMIN_ROLES = ["super_admin", "admin", "editor"];
 exports.DELIVERY_TIME_MAX_HOURS = {
   "10-11am": 9,
   "13-14pm": 12,

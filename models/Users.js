@@ -41,7 +41,10 @@ const userSchema = new mongoose.Schema({
       message: 'Passwords are not the same',
     },
   },
-  verifyCode: String,
+  verifyCode: {
+    type: String,
+    default: Math.floor(100000 + Math.random() * 900000)
+  },
   verified: { 
     type: Boolean, 
     default: false 
