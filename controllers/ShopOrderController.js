@@ -47,7 +47,9 @@ exports.updateShopOrder = catchAsync(async (req, res, next) => {
     return next(new AppError('Տվյալ ID-ով փաստաթուղթ չի հայտնաբերվել', 404));
   }
 
-  await Users.findByIdAndUpdate(doc.user, {$inc: {bonus: req.body.bonus - last.bonus}}, {useFindAndModify: false})
+  if("price" in req.body){
+    await Users.findByIdAndUpdate(doc.user, {$inc: {bonus: req.body.bonus - last.bonus}}, {useFindAndModify: false});
+  }
 
   await ActivityLogs.create({
     admin: "5f8a0a8cb68b0e012ce2c846",
