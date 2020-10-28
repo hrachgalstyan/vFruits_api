@@ -44,18 +44,23 @@ exports.ORDER_STATUS = Object.freeze({
 exports.ACTIVITY_LOGS_STATUS_TYPES = Object.freeze({
   CATEGORY_CREATE: "category_create",
   CATEGORY_UPDATE: "category_update",
+  CATEGORY_DELETE: "category_delete",
   SET_ORDER_STATUS: "set_order_status",
   ORDER_UPDATE: "order_update",
+  ORDER_DELETE: "order_delete",
   PRODUCT_CREATE: "product_create",
   PRODUCT_UPDATE: "product_update",
+  PRODUCT_DELETE: "product_delete",
   COUPON_UPDATE: "coupon_update",
-  COUPON_CREATE: "coupon_create"
+  COUPON_CREATE: "coupon_create",
+  COUPON_DELETE: "coupon_delete"
 });
 
 exports.CHANGE_LOGS_TARGETS = Object.freeze({
   SHOP_ORDER: "ShopOrder",
   PRODUCT: "Product",
-  CATEGORY: "Category"
+  CATEGORY: "Category",
+  COUPON: "Coupon"
 });
 
 exports.PAYMENT_METHODS = {

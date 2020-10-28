@@ -50,6 +50,8 @@ const OrderedProducts = async () => {
     dateString,
   });
 
+  helpers.sendToTelegram(`${dateString} orders added! 💰💰💰`);
+
   console.log('WORKER-DAILY-ORDERS: ADDED NEW ONE - ', dateString);
 };
 

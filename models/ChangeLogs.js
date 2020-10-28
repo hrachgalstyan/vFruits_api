@@ -1,6 +1,4 @@
 const mongoose = require('mongoose');
-const helpers = require('../helpers');
-const ActivityLogs = require('./ActivityLogs');
 
 const changeLogsSchema = new mongoose.Schema({
   admin: { type: mongoose.Schema.ObjectId, ref: 'Admins' },

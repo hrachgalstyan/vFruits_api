@@ -25,11 +25,6 @@ const dailySchema = new mongoose.Schema({
   created_at: { type: Date, default: new Date(Date.now() + 14400000) },
 });
 
-dailySchema.pre(/^save/, function(next) {
-  helpers.sendToTelegram(`${this.dateString} orders added! 💰💰💰`);
-  next();
-});
-
 const DailyTotals = mongoose.model('DailyTotals', dailySchema);
 
 module.exports = DailyTotals;
