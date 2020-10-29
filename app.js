@@ -23,6 +23,8 @@ const CouponsRouter = require(`${__dirname}/routes/CouponsRouter`);
 
 const app = express();
 
+app.enable('trust proxy');
+
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
