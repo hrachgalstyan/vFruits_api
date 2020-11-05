@@ -54,9 +54,9 @@ const userSchema = new mongoose.Schema({
     default: 0 
   },
   addresses: [{
-    address: { type: String, index: true },
+    address: { type: String, index: true, required: true },
     notes: String,
-    orderCount: 0,
+    orderCount: {type: Number, default: 0}
   }],
   orderCount: {
     type: Number,

@@ -14,6 +14,8 @@ router.patch('/resetPassword/:token', AuthUserController.resetPassword);
 router.patch('/updateMyPassword', AuthUserController.protect, AuthUserController.updatePassword);
 router.get('/me', AuthUserController.protect, UsersController.getMe, UsersController.getOne);
 router.patch('/updateMe', AuthUserController.protect, UsersController.updateMe);
+router.patch('/addAddress', AuthUserController.protect, UsersController.addAddress);
+router.delete('/deleteAddress/:id', AuthUserController.protect, UsersController.deleteAddress);
 router.delete('/deleteMe', AuthUserController.protect, UsersController.deleteMe);
 
 router.use(AuthAdminController.protect, AuthAdminController.restrictTo('super_admin'));

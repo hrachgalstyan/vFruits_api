@@ -55,3 +55,30 @@ exports.createUser = Factory.createOne(Users);;
 exports.getOne = Factory.getOne(Users, {path: 'ShopOrders'});
 exports.updateUser = Factory.updateOne(Users);
 exports.deleteUser = Factory.deleteOne(Users);
+
+exports.addAddress = catchAsync(async (req, res, next) => {
+  const filteredBody = filterObj(req.body, 'address', 'notes', 'orderCount');
+  let user = await Users.findByIdAndUpdate(req.user._id, {
+    $push: {addresses: filteredBody}
+  },
+  {new: true, upsert: true, useFindAndModify: false, runValidators: true});
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      user
+    }
+  })
+});
+
+exports.deleteAddress = catchAsync(async (req, res, next) => {
+  await Users.findByIdAndUpdate(req.user._id, {
+    $pull: {addresses: {_id: req.params.id}}
+  },
+  {new: true, upsert: true, useFindAndModify: false, runValidators: true});
+
+  res.status(200).json({
+    status: 'success',
+    data: null
+  })
+});
