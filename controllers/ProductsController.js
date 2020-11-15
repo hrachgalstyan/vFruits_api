@@ -8,7 +8,7 @@ const catchAsync = require('../utils/catchAsync');
 const helpers = require('../helpers');
 
 exports.aliasNewProducts = (req, res, next) => {
-  req.query.limit = '4';
+  req.query.limit = '8';
   req.query.sort = '-created_at';
   req.query.fields = 'nameAm,photo,price,unit,rate,-category,-change_logs';
   next();
