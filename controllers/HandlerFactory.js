@@ -76,8 +76,6 @@ exports.getAll = (Model, sec_query) => catchAsync(async (req, res, next) => {
     res.status(200).json({
         status: 'success',
         results: doc.length,
-        data: {
-            data: doc,
-        },
+        data: doc
     });
 })
